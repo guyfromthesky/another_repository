@@ -8,8 +8,6 @@ import multiprocessing
 from multiprocessing import Process , Queue, Manager
 import queue 
 
-from urllib.parse import urlparse
-
 from openpyxl import load_workbook
 
 #GUI
@@ -23,12 +21,10 @@ from time import sleep
 
 import webbrowser
 
-#MyTranslatorAgent = 'google'
-Tool = "Template"
-VerNum = '0.0.1a'
-version = Tool  + " " +  VerNum
-
-# It's strong recommended to name global variable in capital letter
+# It's strongly recommended name global variables with capital letters
+TOOL = "Template"
+VERNUM = '0.0.1a'
+VER = TOOL  + " " +  VERNUM
 DELAY1 = 20
 
 #**********************************************************************************
@@ -43,14 +39,15 @@ class Application(Frame):
 		self.parent = Root 
 		
 		self.parent.resizable(False, False)
-		self.parent.title("Sample UI - created by Tkinter")
+		self.parent.title(VER)
 
-		# Queue
+		# When the function is execute, it will run on another process
+		# The Queue is used to send data from that process to the main process
 		self.Process_Queue = Queue['Process_Queue']
 		self.Result_Queue = Queue['Result_Queue']
 		self.Status_Queue = Queue['Status_Queue']
 		self.Debug_Queue = Queue['Debug_Queue']
-
+		# Manager is used to share data between processes
 		self.Manager = Manager['Default_Manager']
 
 		# UI Variable
